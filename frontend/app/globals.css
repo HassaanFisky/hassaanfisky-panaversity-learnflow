@@ -1,6 +1,6 @@
 @layer base {
   :root {
-    @import 'e:\\panaversity\\design-system\\tokens.css';
+    @import "./design-tokens.css";
     
     /* Mapping shadcn-like variables to tokens for compatibility */
     --background: var(--bg-base);
