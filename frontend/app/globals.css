@@ -1,0 +1,62 @@
+@layer base {
+  :root {
+    @import 'e:\\panaversity\\design-system\\tokens.css';
+    
+    /* Mapping shadcn-like variables to tokens for compatibility */
+    --background: var(--bg-base);
+    --foreground: var(--text-primary);
+    --card: var(--bg-surface);
+    --card-foreground: var(--text-primary);
+    --popover: var(--bg-elevated);
+    --popover-foreground: var(--text-primary);
+    --primary: var(--accent);
+    --primary-foreground: #0A0A0A;
+    --secondary: var(--bg-elevated);
+    --secondary-foreground: var(--text-primary);
+    --muted: var(--bg-surface);
+    --muted-foreground: var(--text-muted);
+    --accent: var(--accent-dim);
+    --accent-foreground: var(--accent);
+    --destructive: var(--error);
+    --destructive-foreground: var(--text-primary);
+    --border: var(--border-subtle);
+    --input: var(--border-subtle);
+    --ring: var(--accent);
+    --radius: var(--radius-md);
+  }
+
+  .dark {
+    /* Already in dark mode by default tokens */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-[var(--border-subtle)];
+  }
+  body {
+    @apply bg-[var(--bg-base)] text-[var(--text-primary)] font-sans antialiased;
+  }
+}
+
+/* Custom Animations */
+@keyframes ring-draw {
+  from {
+    stroke-dashoffset: 283;
+  }
+  to {
+    stroke-dashoffset: var(--dash-offset);
+  }
+}
+
+.animate-ring {
+  animation: ring-draw 1.5s ease-out forwards;
+}
+
+.glass-morphism {
+  @apply bg-background/60 backdrop-blur-lg border border-white/10;
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at top center, hsla(221, 83%, 53%, 0.15), transparent 70%);
+}
