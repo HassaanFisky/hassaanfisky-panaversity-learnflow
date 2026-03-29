@@ -48,7 +48,43 @@ export default function LearnPage() {
         const modulesData = await modulesResponse.json();
         const progressData = await progressResponse.json();
 
-        setModules(modulesData || []);
+        // MOCK DATA: Provide high-fidelity defaults if DB is empty
+        const defaultModules: Module[] = [
+          {
+            id: "m1",
+            name: "The Generative Shift",
+            slug: "gen-shift",
+            description: "Understanding the move from predictive to generative models.",
+            order: 1,
+            total_topics: 12
+          },
+          {
+            id: "m2",
+            name: "Prompt Engineering v4",
+            slug: "prompt-v4",
+            description: "Mastering the linguistic architecture of modern LLMs.",
+            order: 2,
+            total_topics: 18
+          },
+          {
+            id: "m3",
+            name: "Agentic Workflows",
+            slug: "agentic-flows",
+            description: "Designing autonomous loops that solve complex problems.",
+            order: 3,
+            total_topics: 15
+          },
+          {
+            id: "m4",
+            name: "AI Ethics & Global Governance",
+            slug: "ethics",
+            description: "Navigating the legal and moral landscape of AI.",
+            order: 4,
+            total_topics: 8
+          }
+        ];
+
+        setModules(modulesData && modulesData.length > 0 ? modulesData : defaultModules);
         
         const progressMap: Record<string, UserProgress> = {};
         (progressData || []).forEach((p: UserProgress) => {
