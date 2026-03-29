@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowLeft, Award, BookOpen, Clock, Medal, Sparkles, Target, TrendingUp, Trophy } from "lucide-react";
+import { ArrowLeft, Award, BookOpen, CheckCircle2, Clock, Medal, Sparkles, Target, TrendingUp, Trophy } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import MasteryBar from "@/components/MasteryBar";
@@ -18,9 +18,9 @@ interface ProgressData {
   user_id: string;
   modules: ModuleProgress[];
   overall_mastery: number;
-  total_attempts: int;
-  modules_started: int;
-  modules_mastered: int;
+  total_attempts: number;
+  modules_started: number;
+  modules_mastered: number;
 }
 
 export default function ProgressPage() {

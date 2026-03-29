@@ -1,62 +1,94 @@
-@layer base {
-  :root {
-    @import "./design-tokens.css";
-    
-    /* Mapping shadcn-like variables to tokens for compatibility */
-    --background: var(--bg-base);
-    --foreground: var(--text-primary);
-    --card: var(--bg-surface);
-    --card-foreground: var(--text-primary);
-    --popover: var(--bg-elevated);
-    --popover-foreground: var(--text-primary);
-    --primary: var(--accent);
-    --primary-foreground: #0A0A0A;
-    --secondary: var(--bg-elevated);
-    --secondary-foreground: var(--text-primary);
-    --muted: var(--bg-surface);
-    --muted-foreground: var(--text-muted);
-    --accent: var(--accent-dim);
-    --accent-foreground: var(--accent);
-    --destructive: var(--error);
-    --destructive-foreground: var(--text-primary);
-    --border: var(--border-subtle);
-    --input: var(--border-subtle);
-    --ring: var(--accent);
-    --radius: var(--radius-md);
-  }
+@import "tailwindcss";
 
-  .dark {
-    /* Already in dark mode by default tokens */
-  }
+@theme {
+  --color-bg-base: #FCFAF8;
+  --color-bg-surface: #F0EBE1;
+  --color-bg-elevated: #EAE4D9;
+  --color-text-primary: #38312E;
+  --color-text-secondary: #5F5854;
+  --color-text-muted: #8A857D;
+  --color-accent: #D97757;
+  --color-border-fine: #E5E0D8;
+  --font-lora: "Lora", serif;
+  --font-inter: "Inter", sans-serif;
+  
+  --shadow-card: 0 2px 12px -4px rgba(56, 49, 46, 0.08), 0 0 0 0.8px var(--color-border-fine);
+  --shadow-float: 0 12px 48px -8px rgba(56, 49, 46, 0.15), 0 0 0 0.8px var(--color-border-fine);
 }
 
-@layer base {
-  * {
-    @apply border-[var(--border-subtle)];
-  }
-  body {
-    @apply bg-[var(--bg-base)] text-[var(--text-primary)] font-sans antialiased;
-  }
+:root {
+  --bg-base: #FCFAF8;
+  --bg-surface: #F0EBE1;
+  --text-primary: #38312E;
+  --text-secondary: #5F5854;
+  --text-muted: #8A857D;
+  --accent: #D97757;
+  --border-fine: #E5E0D8;
 }
 
-/* Custom Animations */
-@keyframes ring-draw {
-  from {
-    stroke-dashoffset: 283;
-  }
-  to {
-    stroke-dashoffset: var(--dash-offset);
-  }
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(rgba(56, 49, 46, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: center center;
+  line-height: 1.6;
 }
 
-.animate-ring {
-  animation: ring-draw 1.5s ease-out forwards;
+.prose-editorial {
+  font-family: var(--font-lora);
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
-.glass-morphism {
-  @apply bg-background/60 backdrop-blur-lg border border-white/10;
+.card-humanist {
+  background-color: #ffffff;
+  border: 1px solid var(--border-fine);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-card);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hero-gradient {
-  background: radial-gradient(circle at top center, hsla(221, 83%, 53%, 0.15), transparent 70%);
+.card-humanist:hover {
+  box-shadow: var(--shadow-float);
+}
+
+.btn-tactile {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-tactile:active {
+  transform: scale(0.98);
+}
+
+.glass-nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(20px);
+  background-color: rgba(252, 250, 248, 0.7);
+  border-bottom: 1px solid var(--border-fine);
+}
+
+.transition-editorial {
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-fine);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }

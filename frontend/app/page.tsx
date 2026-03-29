@@ -1,5 +1,28 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Navbar } from "@/components/Navbar";
 import { MotionDiv, fadeUp, stagger } from "@/components/motion";
+import { 
+  ArrowRight, 
+  Code, 
+  Sparkles, 
+  LineChart, 
+  Terminal,
+  ChevronRight,
+  BookOpen,
+  Cpu,
+  Bookmark
+} from "lucide-react";
+
+interface ModulePreview {
+  id: string;
+  name: string;
+  description: string;
+  slug: string;
+  order: number;
+}
 
 export default function LandingPage() {
   const [modules, setModules] = useState<ModulePreview[]>([]);
@@ -27,130 +50,125 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[var(--bg-base)] flex flex-col">
+    <div className="min-h-screen bg-bg-base flex flex-col font-sans selection:bg-accent/10">
       <Navbar />
 
-      <main className="flex-1 overflow-hidden">
-        {/* Hero Section */}
-        <section className="relative min-h-[85vh] flex flex-col items-center justify-center pt-24 pb-12">
-          {/* Radial Gradients */}
-          <div 
-            className="absolute inset-0 z-0 pointer-events-none"
-            style={{
-              background: `
-                radial-gradient(ellipse 900px 600px at 50% -100px, rgba(212,165,116,0.08), transparent 70%),
-                radial-gradient(ellipse 600px 400px at 80% 80%, rgba(61,214,140,0.04), transparent 60%),
-                var(--bg-base)`
-            }}
-          />
-
-          {/* Noise Texture */}
-          <svg className="fixed inset-0 w-full h-full pointer-events-none z-0 opacity-[0.035]">
-            <filter id="noise">
-              <feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/>
-              <feColorMatrix type="saturate" values="0"/>
-            </filter>
-            <rect width="100%" height="100%" filter="url(#noise)"/>
-          </svg>
-
+      <main className="flex-1">
+        {/* Editorial Hero Section */}
+        <section className="relative pt-48 pb-32 overflow-hidden flex items-center justify-center text-center px-6">
           <MotionDiv 
-            variants={fadeUp}
+            variants={stagger}
             initial="initial"
             animate="animate"
-            className="relative z-10 container mx-auto px-4 text-center max-w-4xl"
+            className="max-w-4xl relative z-10"
           >
-            <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--text-muted)] mb-6">
-              Panaversity Hackathon III
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-soft border border-accent/10 mb-8 backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-accent">
+                System Logic • Autonomy
+              </span>
             </div>
             
-            <h1 className="text-[52px] font-semibold tracking-[-0.03em] leading-[1.1] text-[var(--text-primary)] mb-8">
-              Master Python with
+            <h1 className="text-6xl md:text-8xl font-serif tracking-tight text-text-primary mb-10 leading-[1.05]">
+              Master Python.
               <br />
-              <span style={{ color: "var(--accent)" }}>AI-Powered Flow.</span>
+              <span className="text-accent italic">Engineered for Flow.</span>
             </h1>
 
-            <p className="mx-auto mt-6 max-w-xl text-[17px] text-[var(--text-secondary)] font-medium leading-relaxed mb-10">
-              Real-time feedback, interactive coding sandbox, and a personalized AI tutor that adapts to your learning style.
+            <p className="mx-auto mt-8 max-w-2xl text-xl md:text-2xl font-serif italic text-text-secondary leading-relaxed mb-16 opacity-80">
+              Transforming raw syntax into agentic mastery. A high-fidelity sandbox paired with an adaptive AI tutor — scaled for the modern scholar.
             </p>
 
-            <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-6">
               <Link
                 href="/learn"
-                className="bg-[var(--accent)] text-[#0A0A0A] font-medium text-[13px] px-8 py-3 rounded-[var(--radius-sm)] hover:brightness-110 active:scale-[0.97] transition-all duration-150 flex items-center gap-2 shadow-sm"
+                className="btn-tactile bg-accent text-white font-bold text-[14px] uppercase tracking-widest px-12 py-5 rounded-xl shadow-float shadow-accent/20 flex items-center gap-4 w-full sm:w-auto justify-center"
               >
-                Start Learning Now <ArrowRight className="h-4 w-4" />
+                Enter Protocol <ArrowRight className="h-4 w-4" />
               </Link>
               <Link
                 href="/practice"
-                className="bg-transparent border border-[var(--border-muted)] text-[var(--text-primary)] text-[13px] font-medium px-8 py-3 rounded-[var(--radius-sm)] hover:border-[var(--border-active)] hover:bg-[var(--bg-elevated)] transition-all duration-150 flex items-center gap-2"
+                className="btn-tactile bg-white border border-border-fine text-text-primary font-bold text-[14px] uppercase tracking-widest px-12 py-5 rounded-xl hover:bg-bg-surface transition-colors flex items-center gap-4 w-full sm:w-auto justify-center"
               >
                 <Terminal className="h-4 w-4" />
-                Open Sandbox
+                Live Sandbox
               </Link>
             </div>
           </MotionDiv>
+
+          {/* Background Texture Ornamentation */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-7xl h-full pointer-events-none opacity-[0.02]">
+            <div className="absolute top-20 left-10 w-96 h-96 border border-accent rounded-full animate-pulse" />
+            <div className="absolute bottom-20 right-10 w-64 h-64 border border-accent rounded-full" />
+          </div>
         </section>
 
-        {/* Feature Cards */}
-        <section className="relative z-10 py-24 bg-[var(--bg-base)]">
-          <div className="container mx-auto px-4">
+        {/* The Feature Exhibits */}
+        <section className="py-40 bg-white/50 border-t border-border-fine relative z-10">
+          <div className="container mx-auto px-6">
             <MotionDiv 
               variants={stagger}
               initial="initial"
               whileInView="animate"
-              viewport={{ once: true, margin: "-100px" }}
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              viewport={{ once: true }}
+              className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3"
             >
               <FeatureCard 
-                icon={<Code className="text-[var(--accent)]" size={24} />}
-                title="Interactive Sandbox"
-                description="Write and run code directly in your browser with the same power as a local IDE."
+                icon={<Code size={24} />}
+                title="Monolith Sandbox"
+                description="A heavy-duty browser IDE providing sub-millisecond execution for complex Python algorithms."
               />
               <FeatureCard 
-                icon={<Sparkles className="text-[var(--accent)]" size={24} />}
-                title="AI Tutor Triage"
-                description="Smartly routes your questions to specialists for concepts, debugging, or code review."
+                icon={<Cpu size={24} />}
+                title="Neural Triage"
+                description="Proprietary AI routing system that connects your specific query to optimized knowledge models."
               />
               <FeatureCard 
-                icon={<LineChart className="text-[var(--accent)]" size={24} />}
-                title="Mastery Tracking"
-                description="Monitor your progress through every Python module with weighted mastery scores."
+                icon={<LineChart size={24} />}
+                title="Mastery Metrics"
+                description="Visualizing intellectual growth through weighted performance analytics and deep-skill mapping."
               />
             </MotionDiv>
           </div>
         </section>
 
-        {/* Module Preview */}
-        <section className="py-24 bg-[var(--bg-base)] border-t border-[var(--border-subtle)]">
-          <div className="container mx-auto px-4 space-y-12">
+        {/* The Curriculum Protocol */}
+        <section className="py-40 border-t border-border-fine bg-bg-base relative overflow-hidden">
+          <div className="container mx-auto px-6 space-y-24 relative z-10">
             <MotionDiv
               variants={fadeUp}
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="flex items-center justify-between"
+              className="flex flex-col md:flex-row md:items-end justify-between gap-10 border-b border-border-fine pb-16"
             >
-              <div className="space-y-2">
-                <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--text-muted)]">
-                  The Journey
+              <div className="max-w-2xl space-y-6">
+                <div className="text-[11px] font-bold uppercase tracking-[0.4em] text-accent">
+                  The Protocol
                 </div>
-                <h2 className="text-[32px] font-semibold text-[var(--text-primary)] tracking-tight flex items-center gap-3">
-                  <GraduationCap className="text-[var(--accent)] h-8 w-8" />
-                  Python Curriculum
+                <h2 className="text-5xl md:text-6xl font-serif text-text-primary tracking-tight leading-none">
+                  A Guided Path to Python Expertise
                 </h2>
+                <p className="text-xl md:text-2xl font-serif italic text-text-secondary opacity-80 leading-relaxed">
+                  Structured curriculum engineered for deep scholarship.
+                </p>
               </div>
-              <Link href="/learn" className="text-[var(--accent)] font-medium text-[13px] flex items-center gap-1 hover:brightness-110 transition-all">
-                View All Modules <ArrowRight size={14} />
+              <Link 
+                href="/learn" 
+                className="group inline-flex items-center gap-2 text-[12px] font-bold uppercase tracking-[0.3em] text-accent hover:opacity-80 transition-editorial"
+              >
+                <span>Full Syllabus</span>
+                <ChevronRight size={16} className="group-hover:translate-x-1 transition-transform" />
               </Link>
             </MotionDiv>
 
-            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10">
               {loading ? (
                 Array.from({ length: 4 }).map((_, i) => (
-                  <div key={i} className="h-48 rounded-[var(--radius-md)] bg-[var(--bg-surface)] animate-pulse border border-[var(--border-subtle)]" />
+                  <div key={i} className="h-64 rounded-2xl bg-white border border-border-fine animate-pulse" />
                 ))
               ) : modules.length > 0 ? (
-                modules.slice(0, 4).map((module, i) => (
+                modules.map((module, i) => (
                   <MotionDiv
                     key={module.id}
                     variants={fadeUp}
@@ -160,23 +178,33 @@ export default function LandingPage() {
                     transition={{ delay: 0.1 * i }}
                   >
                     <Link href={`/learn/${module.slug}`} className="block h-full group">
-                      <div className="h-full rounded-[var(--radius-md)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] p-6 shadow-[var(--shadow-card)] hover:border-[var(--border-muted)] hover:-translate-y-[1px] transition-all duration-200 ease-[cubic-bezier(0.16,1,0.3,1)] space-y-4">
-                        <div className="w-10 h-10 rounded-[var(--radius-sm)] bg-[var(--accent-dim)] flex items-center justify-center font-bold text-[var(--accent)] text-[14px]">
-                          {module.order}
+                      <div className="h-full bg-white border border-border-fine rounded-2xl p-10 shadow-card hover:shadow-float transition-editorial group-hover:-translate-y-2 flex flex-col justify-between">
+                        <div className="space-y-8">
+                          <div className="w-14 h-14 rounded-xl bg-bg-elevated flex items-center justify-center font-bold text-accent text-sm border-[0.8px] border-border-fine shadow-sm">
+                            {module.order < 10 ? `0${module.order}` : module.order}
+                          </div>
+                          <div className="space-y-4">
+                            <h3 className="font-serif font-bold text-2xl text-text-primary tracking-tight group-hover:text-accent transition-editorial">
+                              {module.name}
+                            </h3>
+                            <p className="text-sm prose-editorial text-text-secondary leading-relaxed line-clamp-3">
+                              {module.description}
+                            </p>
+                          </div>
                         </div>
-                        <div className="space-y-1">
-                          <h3 className="font-semibold text-[17px] text-[var(--text-primary)] tracking-tight">{module.name}</h3>
-                          <p className="text-[13px] text-[var(--text-secondary)] line-clamp-2 leading-relaxed">
-                            {module.description}
-                          </p>
+                        <div className="pt-10 flex items-center justify-between">
+                          <div className="flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted transition-colors">
+                            <Bookmark size={14} className="opacity-50" /> Proceed
+                          </div>
+                          <ArrowRight size={14} className="text-accent opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-editorial" />
                         </div>
                       </div>
                     </Link>
                   </MotionDiv>
                 ))
               ) : (
-                <div className="col-span-full py-12 text-center text-[var(--text-muted)]">
-                  No modules found. Please seed the database.
+                <div className="col-span-full py-32 bg-white border border-dashed border-border-fine rounded-2xl text-center text-text-muted font-serif italic text-xl shadow-inner">
+                  Project curriculum is currently being compiled by the AI.
                 </div>
               )}
             </div>
@@ -184,9 +212,50 @@ export default function LandingPage() {
         </section>
       </main>
 
-      <footer className="border-t border-[var(--border-subtle)] py-12 bg-[var(--bg-base)] text-center">
-        <div className="text-[11px] font-medium tracking-[0.08em] uppercase text-[var(--text-muted)]">
-          &copy; 2026 LearnFlow | Panaversity Hackathon III
+      {/* Editorial Footer */}
+      <footer className="py-32 border-t border-border-fine bg-white relative z-10 transition-editorial">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-3 items-start gap-16 mb-24">
+            <div className="space-y-8">
+              <div className="flex flex-col gap-4">
+                <span className="font-serif font-bold text-4xl tracking-tight text-text-primary">LearnFlow</span>
+                <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-accent">Panaversity Engine</span>
+              </div>
+              <p className="text-sm prose-editorial text-text-secondary leading-relaxed">
+                Empowering the next generation of autonomous engineers through rigorous scholarship and agentic pedagogy.
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-2 col-span-2 gap-10">
+              <div className="space-y-8">
+                <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-text-muted">Research</h4>
+                <div className="flex flex-col gap-6 text-[12px] font-bold uppercase tracking-[0.2em] text-text-primary">
+                  <Link href="/" className="hover:text-accent transition-editorial">Methodology</Link>
+                  <Link href="/" className="hover:text-accent transition-editorial">Skill Library</Link>
+                  <Link href="/" className="hover:text-accent transition-editorial">Benchmarks</Link>
+                </div>
+              </div>
+              <div className="space-y-8">
+                <h4 className="text-[10px] font-bold uppercase tracking-[0.4em] text-text-muted">Institutional</h4>
+                <div className="flex flex-col gap-6 text-[12px] font-bold uppercase tracking-[0.2em] text-text-primary">
+                  <Link href="/" className="hover:text-accent transition-editorial">Faculty</Link>
+                  <Link href="/" className="hover:text-accent transition-editorial">Ethical Framework</Link>
+                  <Link href="/" className="hover:text-accent transition-editorial">Contact</Link>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="pt-16 border-t border-border-fine flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="text-[10px] font-bold uppercase tracking-[0.4em] text-text-muted">
+              &copy; 2026 Panaversity &bull; Systemic Excellence
+            </div>
+            <div className="flex items-center gap-8">
+              <div className="w-10 h-10 rounded-lg border border-border-fine flex items-center justify-center text-text-primary hover:border-accent hover:text-accent transition-editorial cursor-pointer">
+                <Sparkles size={16} />
+              </div>
+            </div>
+          </div>
         </div>
       </footer>
     </div>
@@ -197,13 +266,17 @@ function FeatureCard({ icon, title, description }: { icon: React.ReactNode, titl
   return (
     <MotionDiv 
       variants={fadeUp}
-      className="p-8 rounded-[var(--radius-lg)] border border-[var(--border-subtle)] bg-[var(--bg-surface)] shadow-[var(--shadow-elevated)] space-y-6 hover:border-[var(--border-muted)] hover:-translate-y-1 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group"
+      className="p-12 bg-white border border-border-fine rounded-2xl shadow-card hover:shadow-float transition-editorial group relative overflow-hidden"
     >
-      <div className="p-3 bg-[var(--accent-dim)] rounded-[var(--radius-md)] w-fit group-hover:scale-110 transition-transform duration-300">
+      <div className="p-4 bg-bg-surface rounded-xl border border-border-fine w-fit mb-10 group-hover:scale-110 transition-transform duration-700 text-accent">
         {icon}
       </div>
-      <h3 className="text-[20px] font-semibold text-[var(--text-primary)] tracking-tight">{title}</h3>
-      <p className="text-[15px] text-[var(--text-secondary)] leading-relaxed">{description}</p>
+      <h3 className="text-3xl font-serif font-bold text-text-primary tracking-tight mb-6 group-hover:text-accent transition-editorial">
+        {title}
+      </h3>
+      <p className="text-lg prose-editorial text-text-secondary leading-relaxed opacity-80">
+        {description}
+      </p>
     </MotionDiv>
   );
 }

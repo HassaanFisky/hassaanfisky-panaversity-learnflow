@@ -1,0 +1,143 @@
+﻿
+> learnflow-frontend@1.0.0 build
+> next build
+
+   Γû▓ Next.js 15.1.0
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+node.exe : Failed to compile.
+At C:\Users\fisky\AppData\Roaming\npm\npm.
+ps1:24 char:5
++     & "node$exe"  "$basedir/node_modules
+/npm/bin/npm-cli.js" $args
++     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecifie 
+   d: (Failed to compile.:String) [], Re  
+  moteException
+    + FullyQualifiedErrorId : NativeComma 
+   ndError
+ 
+
+app\layout.tsx
+An error occurred in `next/font`.
+
+Error: Cannot find module 'autoprefixer'
+Require stack:
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\build\web
+pack\config\blocks\css\plugins.js
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\build\web
+pack\config\blocks\css\index.js
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\build\web
+pack\config\index.js
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\build\web
+pack-config.js
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\build\web
+pack-build\impl.js
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\compiled\
+jest-worker\processChild.js
+    at Module.<anonymous> 
+(node:internal/modules/cjs/loader:1448:15)
+    at E:\panaversity\hackathon-3\learnflo
+w-app\frontend\node_modules\next\dist\serv
+er\require-hook.js:55:36
+    at require.resolve 
+(node:internal/modules/helpers:163:19)
+    at loadPlugin (E:\panaversity\hackatho
+n-3\learnflow-app\frontend\node_modules\ne
+xt\dist\build\webpack\config\blocks\css\pl
+ugins.js:49:32)
+    at E:\panaversity\hackathon-3\learnflo
+w-app\frontend\node_modules\next\dist\buil
+d\webpack\config\blocks\css\plugins.js:157
+:56
+    at Array.map (<anonymous>)
+    at getPostCssPlugins (E:\panaversity\h
+ackathon-3\learnflow-app\frontend\node_mod
+ules\next\dist\build\webpack\config\blocks
+\css\plugins.js:157:47)
+    at async E:\panaversity\hackathon-3\le
+arnflow-app\frontend\node_modules\next\dis
+t\build\webpack\config\blocks\css\index.js
+:124:36
+    at async E:\panaversity\hackathon-3\le
+arnflow-app\frontend\node_modules\next\dis
+t\build\webpack\loaders\next-font-loader\i
+ndex.js:86:33
+    at async Span.traceAsyncFn (E:\panaver
+sity\hackathon-3\learnflow-app\frontend\no
+de_modules\next\dist\trace\trace.js:153:20
+)
+
+app\layout.tsx
+An error occurred in `next/font`.
+
+Error: Cannot find module 'autoprefixer'
+Require stack:
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\build\web
+pack\config\blocks\css\plugins.js
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\build\web
+pack\config\blocks\css\index.js
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\build\web
+pack\config\index.js
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\build\web
+pack-config.js
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\build\web
+pack-build\impl.js
+- E:\panaversity\hackathon-3\learnflow-app
+\frontend\node_modules\next\dist\compiled\
+jest-worker\processChild.js
+    at Module.<anonymous> 
+(node:internal/modules/cjs/loader:1448:15)
+    at E:\panaversity\hackathon-3\learnflo
+w-app\frontend\node_modules\next\dist\serv
+er\require-hook.js:55:36
+    at require.resolve 
+(node:internal/modules/helpers:163:19)
+    at loadPlugin (E:\panaversity\hackatho
+n-3\learnflow-app\frontend\node_modules\ne
+xt\dist\build\webpack\config\blocks\css\pl
+ugins.js:49:32)
+    at E:\panaversity\hackathon-3\learnflo
+w-app\frontend\node_modules\next\dist\buil
+d\webpack\config\blocks\css\plugins.js:157
+:56
+    at Array.map (<anonymous>)
+    at getPostCssPlugins (E:\panaversity\h
+ackathon-3\learnflow-app\frontend\node_mod
+ules\next\dist\build\webpack\config\blocks
+\css\plugins.js:157:47)
+    at async E:\panaversity\hackathon-3\le
+arnflow-app\frontend\node_modules\next\dis
+t\build\webpack\config\blocks\css\index.js
+:124:36
+    at async E:\panaversity\hackathon-3\le
+arnflow-app\frontend\node_modules\next\dis
+t\build\webpack\loaders\next-font-loader\i
+ndex.js:86:33
+    at async Span.traceAsyncFn (E:\panaver
+sity\hackathon-3\learnflow-app\frontend\no
+de_modules\next\dist\trace\trace.js:153:20
+)
+
+./app/layout.tsx
+Module not found: Can't resolve 
+'next-themes'
+
+https://nextjs.org/docs/messages/module-no
+t-found
+
+
+> Build failed because of webpack errors

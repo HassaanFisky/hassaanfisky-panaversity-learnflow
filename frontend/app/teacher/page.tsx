@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { AlertCircle, ArrowLeft, BarChart3, GraduationCap, LayoutDashboard, LineChart, MessageSquare, PieChart, RefreshCw, Send, Users } from "lucide-react";
+import { AlertCircle, ArrowLeft, BarChart3, CheckCircle2, GraduationCap, LayoutDashboard, LineChart, MessageSquare, PieChart, PieChartIcon, RefreshCw, Send, Users } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { 

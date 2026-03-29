@@ -1,7 +1,8 @@
 "use client";
 
+import { Suspense } from "react";
 import { motion } from "framer-motion";
-import { ArrowLeft, BookOpen, Bug, CheckCircle2, ChevronRight, Play, RefreshCw, Send, Sparkles, Trophy } from "lucide-react";
+import { ArrowLeft, BookOpen, Bug, CheckCircle2, ChevronRight, Loader2, Play, RefreshCw, Send, Sparkles, Terminal, Trophy } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -18,7 +19,7 @@ interface Exercise {
 }
 
 interface GradeResult {
-  passed: bool;
+  passed: boolean;
   output: string;
   feedback: string;
   score: number;
@@ -27,7 +28,7 @@ interface GradeResult {
   error?: string;
 }
 
-export default function PracticePage() {
+function PracticePageContent() {
   const searchParams = useSearchParams();
   const moduleSlug = searchParams.get("module") || "basics";
   const topicSlug = searchParams.get("topic") || "";
@@ -342,5 +343,13 @@ export default function PracticePage() {
         </aside>
       </div>
     </div>
+  );
+}
+
+export default function PracticePage() {
+  return (
+    <Suspense fallback={<div className="h-screen flex items-center justify-center"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>}>
+      <PracticePageContent />
+    </Suspense>
   );
 }

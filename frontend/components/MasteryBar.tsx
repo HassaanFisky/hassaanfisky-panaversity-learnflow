@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { CheckCircle2, ChevronRight, Sparkles, Target, Trophy } from "lucide-react";
-import Link from "next/link";
 
 interface MasteryBarProps {
   label: string;
@@ -18,63 +17,64 @@ export default function MasteryBar({
   isMastered = false 
 }: MasteryBarProps) {
   
-  const statusColor = isMastered ? "bg-primary shadow-lg shadow-primary/20" : "bg-primary opacity-80 opacity-60";
-  const ringColor = isMastered ? "border-primary shadow-xl shadow-primary/10" : "border-background hover:border-primary/40";
-  
   return (
-    <div className={`p-8 rounded-[2.5rem] border-2 transition-all flex flex-col gap-6 relative group bg-background glass-morphism ${ringColor}`}>
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-4">
-           <div className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 ${isMastered ? 'bg-primary text-primary-foreground' : 'bg-secondary text-muted-foreground opacity-60'}`}>
-              {isMastered ? <Trophy size={24} /> : <Target size={24} />}
+    <div className={`p-8 card-humanist relative group flex flex-col gap-8 transition-all duration-500`}>
+      <div className="flex items-start justify-between">
+        <div className="flex items-center gap-5">
+           <div className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 transition-transform duration-500 group-hover:scale-110 ${isMastered ? 'bg-accent-soft text-accent border border-accent/10' : 'bg-bg-elevated text-text-muted border border-fine'}`}>
+              {isMastered ? <Trophy size={26} /> : <Target size={26} />}
            </div>
-           <div className="space-y-1">
-              <h3 className="text-xl font-bold tracking-tight italic group-hover:text-primary transition-colors">{label}</h3>
-              <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-muted-foreground">
-                 <span>{attempts} Practice Sessions</span>
-                 <span className="w-1 h-1 rounded-full bg-border" />
-                 <span>Level {Math.ceil(attempts / 3) || 1}</span>
+           <div className="space-y-1.5">
+              <h3 className="text-2xl font-serif text-text-primary tracking-tight group-hover:text-accent transition-colors">
+                {label}
+              </h3>
+              <div className="flex items-center gap-3 text-[10px] font-bold uppercase tracking-[0.25em] text-text-muted">
+                 <span>{attempts} Sessions</span>
+                 <span className="w-1 h-1 rounded-full bg-border-fine" />
+                 <span className="text-text-secondary">Level {Math.ceil(attempts / 3) || 1}</span>
               </div>
            </div>
         </div>
 
         <div className="text-right">
-           <div className="text-3xl font-black tracking-tighter italic">{Math.round(percentage)}%</div>
-           <div className="text-[10px] uppercase font-black tracking-widest text-primary italic font-medium leading-none">Mastery</div>
+           <div className="text-4xl font-serif text-text-primary tracking-tight leading-none group-hover:text-accent transition-colors">
+            {Math.round(percentage)}%
+           </div>
+           <div className="text-[10px] uppercase font-bold tracking-[0.3em] text-accent mt-2">
+            Mastery
+           </div>
         </div>
       </div>
 
-      <div className="space-y-3">
-         <div className="h-4 w-full bg-secondary/50 rounded-full overflow-hidden border p-0.5 shadow-inner">
+      <div className="space-y-4">
+         <div className="h-2 w-full bg-bg-elevated rounded-full overflow-hidden border border-fine">
             <motion.div
                initial={{ width: 0 }}
                animate={{ width: `${percentage}%` }}
-               transition={{ duration: 1, ease: "easeOut" }}
-               className={`h-full rounded-full relative group-hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] duration-500 ${statusColor}`}
-            >
-               {/* Animated highlight */}
-               <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
-            </motion.div>
+               transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+               className={`h-full rounded-full bg-accent relative`}
+            />
          </div>
          
-         <div className="flex justify-between items-center text-[10px] font-black uppercase tracking-widest">
-            <span className="text-muted-foreground">Novice</span>
-            <div className="flex items-center gap-2 text-primary font-bold italic h-4 shadow-primary/10">
+         <div className="flex justify-between items-center text-[10px] font-bold uppercase tracking-[0.2em] text-text-muted">
+            <span>Basic</span>
+            <div className={`flex items-center gap-2 transition-all duration-300 ${isMastered ? 'text-success' : 'text-text-secondary group-hover:text-accent'}`}>
                {isMastered ? (
-                  <span className="flex items-center gap-1"><CheckCircle2 size={12} /> Mastered</span>
+                  <span className="flex items-center gap-1.5"><CheckCircle2 size={14} /> Concept Mastered</span>
                ) : (
-                  <span className="flex items-center gap-1 group-hover:gap-2 transition-all">Continue Practice <ChevronRight size={12} /></span>
+                  <span className="flex items-center gap-1.5 group-hover:gap-2 transition-all">Continue Practice <ChevronRight size={14} /></span>
                )}
             </div>
-            <span className="text-muted-foreground">Expert</span>
+            <span>Advanced</span>
          </div>
       </div>
 
       {isMastered && (
-         <div className="absolute -top-4 -right-4 bg-primary text-primary-foreground p-2 rounded-xl border-4 border-background shadow-xl scale-110 drop-shadow-primary/50">
+         <div className="absolute -top-3 -right-3 bg-white text-accent p-2 rounded-xl border border-fine shadow-float scale-110">
             <Sparkles size={18} className="animate-pulse" />
          </div>
       )}
     </div>
   );
 }
+
