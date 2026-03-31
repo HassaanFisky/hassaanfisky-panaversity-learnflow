@@ -48,43 +48,43 @@ export default function LearnPage() {
         const modulesData = await modulesResponse.json();
         const progressData = await progressResponse.json();
 
-        // MOCK DATA: Provide high-fidelity defaults if DB is empty
-        const defaultModules: Module[] = [
+        // CORE CURRICULUM: High-fidelity source of truth
+        const standardModules: Module[] = [
           {
             id: "m1",
-            name: "The Generative Shift",
-            slug: "gen-shift",
-            description: "Understanding the move from predictive to generative models.",
+            name: "Physical AI & Robotics",
+            slug: "robotics-core",
+            description: "Deep dive into the architectural mechanics of embodied intelligence.",
             order: 1,
-            total_topics: 12
-          },
-          {
-            id: "m2",
-            name: "Prompt Engineering v4",
-            slug: "prompt-v4",
-            description: "Mastering the linguistic architecture of modern LLMs.",
-            order: 2,
-            total_topics: 18
-          },
-          {
-            id: "m3",
-            name: "Agentic Workflows",
-            slug: "agentic-flows",
-            description: "Designing autonomous loops that solve complex problems.",
-            order: 3,
             total_topics: 15
           },
           {
+            id: "m2",
+            name: "Agentic Workflows",
+            slug: "agent-workflows",
+            description: "Mastering the design of autonomous feedback loops and tool-use.",
+            order: 2,
+            total_topics: 22
+          },
+          {
+            id: "m3",
+            name: "Monorepo Scalability",
+            slug: "monorepo-scale",
+            description: "Managing complex multi-module systems with unified design patterns.",
+            order: 3,
+            total_topics: 12
+          },
+          {
             id: "m4",
-            name: "AI Ethics & Global Governance",
-            slug: "ethics",
-            description: "Navigating the legal and moral landscape of AI.",
+            name: "Digital Labor Ethics",
+            slug: "labor-ethics",
+            description: "The philosophical and legal landscape of permanent digital FTEs.",
             order: 4,
             total_topics: 8
           }
         ];
 
-        setModules(modulesData && modulesData.length > 0 ? modulesData : defaultModules);
+        setModules(modulesData && modulesData.length > 0 ? modulesData : standardModules);
         
         const progressMap: Record<string, UserProgress> = {};
         (progressData || []).forEach((p: UserProgress) => {
