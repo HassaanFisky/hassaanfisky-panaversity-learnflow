@@ -35,7 +35,7 @@ export default function TeacherDashboard() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchDashboardData = async () => {
+      const fetchDashboardData = async () => {
       try {
         const [alertsResponse, analyticsResponse] = await Promise.all([
           fetch(`${process.env.NEXT_PUBLIC_SUPABASE_URL}/rest/v1/struggle_alerts?select=*&order=created_at.desc`, {
@@ -44,24 +44,16 @@ export default function TeacherDashboard() {
               Authorization: `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ""}`,
             },
           }),
-          // Static mock for now based on seeded database state
-          {
-            total_users: 156,
-            avg_mastery: 68.4,
-            struggling_users: 12,
-            module_distribution: [
-              { name: "Basics", value: 45 },
-              { name: "Logic", value: 25 },
-              { name: "Loops", value: 15 },
-              { name: "Object-Oriented", value: 10 },
-              { name: "Functional", value: 5 },
-            ],
-          }
+          fetch(`${process.env.NEXT_PUBLIC_PROGRESS_SERVICE_URL}/analytics/summary`)
         ]);
 
-        const alertsData = await alertsResponse.json();
+        const [alertsData, analyticsData] = await Promise.all([
+          alertsResponse.json(),
+          analyticsResponse.json()
+        ]);
+
         setAlerts(alertsData || []);
-        setAnalytics(analyticsResponse as AnalyticsSummary);
+        setAnalytics(analyticsData);
 
       } catch (error) {
         console.error("Failed to fetch teacher dashboard data:", error);
@@ -110,7 +102,7 @@ export default function TeacherDashboard() {
                 </div>
              ))}
              <div className="w-8 h-8 rounded-full bg-primary border-2 border-background flex items-center justify-center text-[10px] font-bold text-primary-foreground">
-               +152
+               +{analytics?.total_users || 0}
              </div>
            </div>
            <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground text-sm font-bold shadow-lg shadow-primary/20">
@@ -125,8 +117,15 @@ export default function TeacherDashboard() {
           <div className="space-y-2">
             <h3 className="text-[10px] uppercase font-black tracking-widest text-muted-foreground pl-2">Overview</h3>
             <div className="space-y-1">
-              <NavButton icon={<Users size={18} />} label="Total Students" active />
-              <NavButton icon={<BarChart3 size={18} />} label="Module Performance" />
+              <NavButton 
+                icon={<Users size={18} />} 
+                label={`Students: ${analytics?.total_users || 0}`} 
+                active 
+              />
+              <NavButton 
+                icon={<BarChart3 size={18} />} 
+                label={`Avg Mastery: ${analytics?.avg_mastery || 0}%`} 
+              />
               <NavButton icon={<GraduationCap size={18} />} label="Class Mastery" />
             </div>
           </div>
@@ -146,7 +145,7 @@ export default function TeacherDashboard() {
           <div className="mt-auto p-6 rounded-3xl bg-primary/10 border-2 border-primary/20 space-y-3 relative overflow-hidden group">
             <h4 className="font-black text-sm text-primary tracking-tight">AI Teaching Assistant</h4>
             <p className="text-[10px] font-medium leading-relaxed opacity-80">
-              "Three more students are struggling with Loop Mastery. Should I broadcast the Loop remediation lesson?"
+              "{analytics?.struggling_users ? `${analytics?.struggling_users} students are currently triggering struggle alerts.` : "Your class is making steady progress."} Should I adjust the difficulty context?"
             </p>
             <button className="w-full py-2 bg-primary text-primary-foreground rounded-xl text-[10px] font-bold hover:opacity-90 transition-opacity">
               ENABLE AUTOMATION
@@ -182,7 +181,7 @@ export default function TeacherDashboard() {
                      <ResponsiveContainer width="100%" height="100%">
                        <RePieChart>
                          <Pie
-                            data={analytics?.module_distribution}
+                            data={analytics?.module_distribution || []}
                             cx="50%"
                             cy="50%"
                             innerRadius={70}
@@ -190,7 +189,7 @@ export default function TeacherDashboard() {
                             paddingAngle={8}
                             dataKey="value"
                          >
-                           {analytics?.module_distribution.map((entry, index) => (
+                           {(analytics?.module_distribution || []).map((entry, index) => (
                              <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                            ))}
                          </Pie>
@@ -214,7 +213,7 @@ export default function TeacherDashboard() {
                    </div>
                    <div className="h-[300px] w-full">
                      <ResponsiveContainer width="100%" height="100%">
-                       <BarChart data={analytics?.module_distribution}>
+                       <BarChart data={analytics?.module_distribution || []}>
                          <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
                          <XAxis 
                             dataKey="name" 

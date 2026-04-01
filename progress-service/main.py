@@ -63,6 +63,14 @@ class ProgressSummary(BaseModel):
     modules_mastered: int = Field(..., description="Modules with mastery >= 80%")
 
 
+class AnalyticsSummary(BaseModel):
+    """Aggregate analytics for teacher dashboard."""
+    total_users: int
+    avg_mastery: float
+    struggling_users: int
+    module_distribution: list[dict[str, Any]]
+
+
 class UpdateProgressRequest(BaseModel):
     """Request to update mastery score for a module."""
     module_slug: str = Field(..., description="Module slug to update progress for")
@@ -171,6 +179,47 @@ async def get_progress(user_id: str) -> ProgressSummary:
         total_attempts=total_attempts,
         modules_started=len(started),
         modules_mastered=len(mastered),
+    )
+
+
+@app.get("/analytics/summary", response_model=AnalyticsSummary, status_code=status.HTTP_200_OK)
+async def get_analytics_summary() -> AnalyticsSummary:
+    """
+    Aggregate cross-user data for teacher insights.
+    Queries Supabase for total users, overall mastery levels, and struggle trends.
+    """
+    supabase = get_supabase()
+    
+    # Fetch progress and alerts data
+    progress_res = supabase.table("progress").select("user_id, module_slug, mastery_score").execute()
+    alerts_res = supabase.table("struggle_alerts").select("user_id").eq("resolved", False).execute()
+    
+    progress_data = progress_res.data or []
+    alerts_data = alerts_res.data or []
+    
+    # Unique Users
+    unique_users = len(set(r["user_id"] for r in progress_data))
+    
+    # Average Mastery
+    scores = [float(r["mastery_score"]) for r in progress_data]
+    avg_mastery = round(sum(scores) / len(scores), 1) if scores else 0.0
+    
+    # Struggling Users (count unique user_ids with active alerts)
+    struggling_count = len(set(r["user_id"] for r in alerts_data))
+    
+    # Module Distribution
+    module_counts: dict[str, int] = {}
+    for r in progress_data:
+        slug = r["module_slug"]
+        module_counts[slug] = module_counts.get(slug, 0) + 1
+        
+    dist = [{"name": k.capitalize(), "value": v} for k, v in module_counts.items()]
+    
+    return AnalyticsSummary(
+        total_users=unique_users,
+        avg_mastery=avg_mastery,
+        struggling_users=struggling_count,
+        module_distribution=dist or [{"name": "Idle", "value": 1}]
     )
 
 
