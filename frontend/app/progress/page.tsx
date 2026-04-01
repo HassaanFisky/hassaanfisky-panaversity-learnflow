@@ -86,7 +86,7 @@ export default function ProgressPage() {
         </div>
       </header>
 
-      <main className="flex-1 container mx-auto p-6 md:p-12 space-y-12 max-w-64">
+      <main className="flex-1 container mx-auto p-6 md:p-12 space-y-12 max-w-7xl">
         {/* Top Summary Stats */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatCard 

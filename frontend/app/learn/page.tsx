@@ -157,7 +157,7 @@ export default function LearnPage() {
                   transition={{ delay: 0.1 * i }}
                   whileHover={{ y: -4 }}
                 >
-                  <Link href={`/learn/${module.slug}/intro`} className="block group h-full">
+                  <Link href={`/learn/${module.slug}`} className="block group h-full" id={`module-card-${module.slug}`}>
                     <div className={`h-full p-8 rounded-[2rem] border-2 transition-all relative overflow-hidden flex flex-col items-center text-center space-y-6 glass-morphism ${isMastered ? 'border-primary/40 bg-primary/5' : 'border-background hover:border-primary/30'}`}>
                       {/* Visual progress indicator */}
                       <div className="relative">
