@@ -1,0 +1,351 @@
+@import "tailwindcss";
+
+/* ─── HI-FI SYSTEM TOKENS ─── */
+:root, [data-theme='light'] {
+  --bg-base:       #FCFAF8; 
+  --bg-surface:    #F0EBE1; 
+  --bg-elevated:   #EBE5D8;
+  --border-fine:   #E5E0D8; 
+  --border-muted:  #DED8CD;
+  --border-active: #D97757;
+  --text-primary:  #38312E; 
+  --text-secondary:#57534E;
+  --text-muted:    #8A857D;
+  --accent:        #D97757; 
+  --accent-dim:    rgba(217, 119, 87, 0.08);
+  --success:       #3D9970;
+  --error:         #D95757;
+  --radius-sm:     0.75rem;
+  --radius-md:     1.25rem;
+  --radius-lg:     2rem;
+  --font-serif:    "Lora", serif;
+  --font-sans:     "Inter", sans-serif;
+  --font-mono:     "JetBrains Mono", monospace;
+  --shadow-card:   0 4px 16px -4px rgba(56, 49, 46, 0.08), 0 0 0 1px var(--border-fine);
+  --shadow-modal:  0 24px 64px -12px rgba(56, 49, 46, 0.12), 0 0 0 1px var(--border-fine);
+  --snow-color:    rgba(255, 255, 255, 0.8);
+}
+
+.dark, [data-theme='dark'] {
+  --bg-base:       #0A0A0A;
+  --bg-surface:    #141414;
+  --bg-elevated:   #1F1F1F;
+  --border-fine:   #262626;
+  --border-muted:  #333333;
+  --border-active: #E58A6D;
+  --text-primary:  #FAF9F6;
+  --text-secondary:#D1D5DB;
+  --text-muted:    #9CA3AF;
+  --accent:        #E58A6D;
+  --accent-dim:    rgba(229, 138, 109, 0.1);
+  --success:       #6EE7B7;
+  --error:         #EF4444;
+  --shadow-card:   0 8px 32px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-fine);
+  --shadow-modal:  0 32px 80px -16px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--border-fine);
+  --snow-color:    rgba(255, 255, 255, 1);
+}
+
+/* ─── HI-FI BASE ─── */
+@layer base {
+  body {
+    background-color: var(--bg-base);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+    transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    background-image: radial-gradient(rgba(56, 49, 46, 0.05) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+
+  .dark body {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  }
+}
+
+/* ─── HI-FI COMPONENTS ─── */
+@layer components {
+  .prose-editorial {
+    font-family: var(--font-serif);
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .card-humanist {
+    background-color: var(--bg-surface);
+    border: 0.8px solid var(--border-fine);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .card-humanist:hover {
+    box-shadow: var(--shadow-modal);
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+
+  .btn-tactile {
+    transition: all 0.3s;
+  }
+
+  .btn-tactile:active {
+    transform: scale(0.97);
+  }
+
+  .glass-nav {
+    position: sticky;
+    top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 50;
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    background-color: rgba(252, 250, 248, 0.8);
+    border: 0.8px solid var(--border-fine);
+    border-radius: var(--radius-lg);
+    width: calc(100% - 2rem);
+    max-width: 1100px;
+  }
+
+  .dark .glass-nav {
+    background-color: rgba(10, 10, 10, 0.85);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* ─── HI-FI UTILITIES ─── */
+@layer utilities {
+  .glass-companion {
+    backdrop-filter: blur(40px) saturate(200%);
+    -webkit-backdrop-filter: blur(40px) saturate(200%);
+    background-color: rgba(252, 250, 248, 0.88);
+    border: 1px solid rgba(56, 49, 46, 0.06);
+    transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .dark .glass-companion {
+    background-color: rgba(14, 14, 14, 0.92);
+    border-color: rgba(255, 255, 255, 0.07);
+  }
+
+  .glass-apple {
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    transition: all 0.5s;
+    background-color: rgba(250, 249, 246, 0.75);
+    border: 1px solid rgba(56, 49, 46, 0.05);
+  }
+
+  .dark .glass-apple {
+    background-color: rgba(10, 10, 10, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .shadow-float {
+    box-shadow: 0 20px 50px -12px rgba(56, 49, 46, 0.12), 0 0 0 1px var(--border-fine);
+  }
+
+  .dark .shadow-float {
+    box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-fine);
+  }
+
+  .glass-panel {
+    backdrop-filter: blur(64px);
+    -webkit-backdrop-filter: blur(64px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: var(--bg-surface);
+  }
+
+  .dark .glass-panel {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .text-gradient {
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    background-image: linear-gradient(to bottom right, var(--text-primary), var(--accent));
+  }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+
+/* Globe/Earth button — slower, more natural rotation */
+@keyframes globe-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+.animate-globe-spin {
+  animation: globe-spin 18s linear infinite;
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Scrollbar hide — used by AiraAssistant and chat areas */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Luxury Smooth Scroll */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
+}
+
+/* Custom scrollbar matching tokens */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-fine);
+  border-radius: 10px;
+  border: 1px solid var(--bg-base);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
+}
+
+/* Selection Highlight */
+::selection {
+  background: var(--accent-dim);
+  color: var(--accent);
+}
+
+/* ─── WEATHER ATMOSPHERE ENGINE ────────────────────────────────────────���─────
+   Variable overrides per weather mode. WeatherOverlay sets data-weather on
+   <html> and triggers CSS transitions. All animations run on GPU.
+─────────────────────────────────────────────────────────────────────────── */
+
+/* Ensure page content (z-10) sits above the sky layer (z-[2]) */
+main { position: relative; z-index: 10; }
+
+[data-weather='clear'] {
+  --weather-bg-overlay: transparent;
+}
+
+[data-weather='snow'] {
+  --weather-bg-overlay: rgba(255, 255, 255, 0.02);
+  --accent:             #A5C9D9;
+}
+
+[data-weather='rain'] {
+  --bg-base:     #060d18;
+  --bg-surface:  #0d1a2e;
+  --bg-elevated: #081525;
+  --text-primary:    #D8ECF8;
+  --text-secondary:  #8AAAC8;
+  --text-muted:      #506070;
+  --accent:          #6B9FD4;
+  --border-fine:     rgba(100, 140, 200, 0.15);
+}
+
+[data-weather='rain'] .glass-apple {
+  background-color: rgba(6, 13, 24, 0.72);
+  border-color: rgba(100, 140, 200, 0.15);
+}
+
+[data-weather='storm'] {
+  --bg-base:     #000000;
+  --bg-surface:  #0d0d0d;
+  --bg-elevated: #080808;
+  --text-primary:    #FFFFFF;
+  --text-secondary:  #BCC8DC;
+  --text-muted:      #8090B8;
+  --accent:          #9BA8FF;
+  --border-fine:     rgba(155, 168, 255, 0.18);
+}
+
+[data-weather='storm'] .glass-apple {
+  background-color: rgba(0, 0, 0, 0.72);
+  border-color: rgba(155, 168, 255, 0.18);
+}
+
+[data-weather='sunny'] {
+  --bg-base:     #1a0900;
+  --bg-surface:  #2a1505;
+  --bg-elevated: #1f1004;
+  --text-primary:    #FFF5E0;
+  --text-secondary:  #F0D0A0;
+  --text-muted:      #A07840;
+  --accent:          #FF8C42;
+  --border-fine:     rgba(255, 160, 80, 0.20);
+}
+
+[data-weather='sunny'] .glass-apple {
+  background-color: rgba(26, 9, 0, 0.72);
+  border-color: rgba(255, 160, 80, 0.20);
+}
+
+[data-weather='cloudy'] {
+  --bg-base:     #0e1116;
+  --bg-surface:  #141820;
+  --bg-elevated: #0f1319;
+  --text-secondary: #94A3B8;
+}
+
+/* Snow parallax layers */
+.snow-layer-1 { opacity: 0.80; filter: blur(0.5px); }
+.snow-layer-2 { opacity: 0.50; filter: blur(1.5px); transform: scale(1.2); }
+.snow-layer-3 { opacity: 0.30; filter: blur(3px);   transform: scale(1.5); }
+
+/* Rain / Storm splash ripples */
+.rain-splash-ripple {
+  border: 1px solid rgba(160, 205, 255, 0.28);
+  border-radius: 50%;
+  opacity: 0;
+  animation: splash-ripple 1.3s ease-out infinite;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+@keyframes splash-ripple {
+  0%   { transform: translateZ(0) scale(0.25); opacity: 0.55; }
+  100% { transform: translateZ(0) scale(3.5);  opacity: 0; }
+}
+
+/* Rain / Storm: wet glass streaks */
+[data-weather='rain'] .glass-apple,
+[data-weather='storm'] .glass-apple { position: relative; }
+
+[data-weather='rain'] .glass-apple::after,
+[data-weather='storm'] .glass-apple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    174deg,
+    transparent 0px, transparent 28px,
+    rgba(140, 190, 255, 0.045) 28px, rgba(140, 190, 255, 0.06) 30px,
+    transparent 30px, transparent 55px
+  );
+  z-index: 0;
+  animation: rain-streaks 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes rain-streaks {
+  0%   { opacity: 0.4; transform: translateY(0); }
+  100% { opacity: 0.9; transform: translateY(6px); }
+}
+
+/* Snow: frost on cards */
+[data-weather='snow'] .card-humanist {
+  border-color: rgba(185, 220, 240, 0.35);
+  box-shadow: 0 0 0 1px rgba(200, 230, 245, 0.15), 0 1px 3px -1px rgba(0,0,0,0.15);
+}

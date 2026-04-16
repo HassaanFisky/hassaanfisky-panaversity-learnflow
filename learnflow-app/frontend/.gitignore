@@ -1,0 +1,34 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build outputs
+.next/
+out/
+build/
+dist/
+
+# Environment (set on Vercel dashboard — never commit)
+.env*
+
+# Vercel
+.vercel/
+
+# Debug / local artifacts
+build.log
+build_error.log
+build_utf8.txt
+deploy_h3.log
+deploy_h3_final.log
+install_err.txt
+*.log
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# OS
+.DS_Store
+Thumbs.db
+*.pem

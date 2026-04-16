@@ -1,0 +1,34 @@
+:root {
+  /* High-Fidelity Humanist Palette (EXACT Blueprint Specs) */
+  --bg-base:        #FCFAF8; /* Warm Beige */
+  --bg-surface:     #F0EBE1; /* Stone Cream */
+  --bg-elevated:    #EAE4D9; /* Deep Cream */
+  
+  /* Refined Border System */
+  --border-fine:    #E5E0D8; /* Blueprint Specified */
+  --border-muted:   #DED8CD; /* Softer divider */
+  --border-active:  #D97757; /* Accent border */
+
+  /* Editorial Typography */
+  --text-primary:   #38312E; /* Deep Obsidian-Brown */
+  --text-secondary: #5F5854; /* Warm Grey-Brown */
+  --text-muted:     #8A857D; /* Soft Mud */
+  
+  /* Signature Accents */
+  --accent:         #D97757; /* Earthy Terracotta */
+  --accent-soft:    rgba(217, 119, 87, 0.1); /* Dimmed Terracotta */
+  --success:        #579D84; /* Sage Green */
+  --error:          #D95757; /* Terracotta Red */
+
+  /* Structural */
+  --radius-sm:      4px;
+  --radius-md:      8px;
+  --radius-lg:      12px;
+  
+  /* Optical Effects (Refined for light mode) */
+  --shadow-card:    0 2px 12px -4px rgba(56, 49, 46, 0.08), 0 0 0 0.8px var(--border-fine);
+  --shadow-float:   0 12px 48px -8px rgba(56, 49, 46, 0.15), 0 0 0 0.8px var(--border-fine);
+
+  /* Transitions */
+  --transition-editorial: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
