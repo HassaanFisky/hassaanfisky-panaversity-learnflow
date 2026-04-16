@@ -1,0 +1,169 @@
+apiVersion: kafka.strimzi.io/v1beta2
+kind: Kafka
+metadata:
+  name: kafka-cluster
+  namespace: kafka
+  labels:
+    app: kafka-cluster
+    managed-by: strimzi
+spec:
+  kafka:
+    version: 3.7.0
+    replicas: 3
+    listeners:
+      - name: plain
+        port: 9092
+        type: internal
+        tls: false
+        configuration:
+          useServiceDnsDomain: true
+      - name: tls
+        port: 9093
+        type: internal
+        tls: true
+        authentication:
+          type: tls
+      - name: external
+        port: 9094
+        type: nodeport
+        tls: false
+    config:
+      offsets.topic.replication.factor: 3
+      transaction.state.log.replication.factor: 3
+      transaction.state.log.min.isr: 2
+      default.replication.factor: 3
+      min.insync.replicas: 2
+      inter.broker.protocol.version: "3.7"
+      log.retention.hours: 168
+      log.retention.bytes: "10737418240"
+      log.segment.bytes: "1073741824"
+      auto.create.topics.enable: "false"
+      delete.topic.enable: "true"
+      compression.type: snappy
+      message.max.bytes: "10485760"
+    jvmOptions:
+      -Xms: 2048m
+      -Xmx: 2048m
+      gcLoggingEnabled: false
+    resources:
+      requests:
+        memory: 4Gi
+        cpu: "1"
+      limits:
+        memory: 6Gi
+        cpu: "2"
+    storage:
+      type: jbod
+      volumes:
+        - id: 0
+          type: persistent-claim
+          size: 10Gi
+          deleteClaim: false
+          class: standard
+    metricsConfig:
+      type: jmxPrometheusExporter
+      valueFrom:
+        configMapKeyRef:
+          name: kafka-metrics
+          key: kafka-metrics-config.yml
+    readinessProbe:
+      initialDelaySeconds: 15
+      timeoutSeconds: 5
+    livenessProbe:
+      initialDelaySeconds: 15
+      timeoutSeconds: 5
+  zookeeper:
+    replicas: 3
+    jvmOptions:
+      -Xms: 512m
+      -Xmx: 512m
+    resources:
+      requests:
+        memory: 1Gi
+        cpu: "250m"
+      limits:
+        memory: 2Gi
+        cpu: "500m"
+    storage:
+      type: persistent-claim
+      size: 5Gi
+      deleteClaim: false
+      class: standard
+    readinessProbe:
+      initialDelaySeconds: 15
+      timeoutSeconds: 5
+    livenessProbe:
+      initialDelaySeconds: 15
+      timeoutSeconds: 5
+  entityOperator:
+    topicOperator:
+      watchedNamespace: kafka
+      reconciliationIntervalSeconds: 90
+      resources:
+        requests:
+          memory: 256Mi
+          cpu: "100m"
+        limits:
+          memory: 512Mi
+          cpu: "250m"
+    userOperator:
+      watchedNamespace: kafka
+      reconciliationIntervalSeconds: 120
+      resources:
+        requests:
+          memory: 256Mi
+          cpu: "100m"
+        limits:
+          memory: 512Mi
+          cpu: "250m"
+  cruiseControl:
+    resources:
+      requests:
+        memory: 512Mi
+        cpu: "250m"
+      limits:
+        memory: 1Gi
+        cpu: "500m"
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: learnflow-events
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: kafka-cluster
+spec:
+  partitions: 6
+  replicas: 3
+  config:
+    retention.ms: "604800000"
+    segment.bytes: "1073741824"
+    min.insync.replicas: "2"
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: progress-updates
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: kafka-cluster
+spec:
+  partitions: 3
+  replicas: 3
+  config:
+    retention.ms: "2592000000"
+    min.insync.replicas: "2"
+---
+apiVersion: kafka.strimzi.io/v1beta2
+kind: KafkaTopic
+metadata:
+  name: struggle-alerts
+  namespace: kafka
+  labels:
+    strimzi.io/cluster: kafka-cluster
+spec:
+  partitions: 3
+  replicas: 3
+  config:
+    retention.ms: "86400000"
+    min.insync.replicas: "2"

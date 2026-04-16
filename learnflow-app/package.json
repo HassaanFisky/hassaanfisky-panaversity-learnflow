@@ -1,0 +1,20 @@
+{
+  "name": "learnflow-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "infra": "echo Use Supabase CLI or SQL seed.sql to initialize your DB",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:triage": "cd triage-service && uvicorn main:app --reload --port 8000",
+    "dev:progress": "cd progress-service && uvicorn main:app --reload --port 8001",
+    "dev:exercise": "cd exercise-service && uvicorn main:app --reload --port 8002",
+    "dev:codereview": "cd codereview-service && uvicorn main:app --reload --port 8003",
+    "dev:concepts": "cd concepts-service && uvicorn main:app --reload --port 8004",
+    "dev:debug": "cd debug-service && uvicorn main:app --reload --port 8005",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:triage\" \"npm run dev:progress\" \"npm run dev:exercise\" \"npm run dev:codereview\" \"npm run dev:concepts\" \"npm run dev:debug\"",
+    "install:all": "concurrently \"cd frontend && npm install\" \"cd triage-service && pip install -r requirements.txt\" \"cd progress-service && pip install -r requirements.txt\" \"cd exercise-service && pip install -r requirements.txt\" \"cd codereview-service && pip install -r requirements.txt\" \"cd concepts-service && pip install -r requirements.txt\" \"cd debug-service && pip install -r requirements.txt\""
+  },
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
