@@ -3,16 +3,17 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Menu, User, BookOpen, Terminal, ShieldCheck } from "lucide-react";
+import { Menu, User, BookOpen, Terminal, ShieldCheck, Gamepad2 } from "lucide-react";
 import { Logo } from "./Logo";
 import { ThemeToggle } from "./ThemeToggle";
 
 import { useSession, signOut } from "@/lib/auth-client";
 
 const NAV_LINKS = [
-  { href: "/learn", label: "Learn", icon: BookOpen },
-  { href: "/practice", label: "Practice", icon: Terminal },
-  { href: "/teacher", label: "Teacher", icon: ShieldCheck },
+  { href: "/learn",    label: "Learn",       icon: BookOpen   },
+  { href: "/practice", label: "Practice",    icon: Terminal   },
+  { href: "/games",    label: "Play & Learn", icon: Gamepad2  },
+  { href: "/teacher",  label: "Teacher",     icon: ShieldCheck },
 ];
 
 /**
