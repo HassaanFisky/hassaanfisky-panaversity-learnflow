@@ -349,3 +349,15 @@ main { position: relative; z-index: 10; }
   border-color: rgba(185, 220, 240, 0.35);
   box-shadow: 0 0 0 1px rgba(200, 230, 245, 0.15), 0 1px 3px -1px rgba(0,0,0,0.15);
 }
+
+/* ── Text protection filters for weather modes ── */
+[data-weather='storm'] h1, [data-weather='storm'] .text-gradient {
+  filter: drop-shadow(0 0 28px rgba(120, 140, 255, 0.55)) drop-shadow(0 12px 32px rgba(0, 0, 0, 0.95));
+}
+[data-weather='sunny'] h1, [data-weather='sunny'] .text-gradient {
+  filter: drop-shadow(0 0 24px rgba(255, 160, 50, 0.50)) drop-shadow(0 12px 28px rgba(0, 0, 0, 0.85));
+}
+[data-weather='rain'] h1, [data-weather='rain'] .text-gradient {
+  filter: drop-shadow(0 0 20px rgba(80, 150, 230, 0.45)) drop-shadow(0 12px 28px rgba(0, 0, 0, 0.90));
+}
+
