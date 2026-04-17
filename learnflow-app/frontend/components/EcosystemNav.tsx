@@ -12,11 +12,11 @@ import { useSession, signOut } from "@/lib/auth-client";
  * Standardized across all hackathon modules.
  */
 const ECOSYSTEM_APPS = [
-  { name: "Portfolio Hub",         image: "https://hassaanfisky-portfolio.vercel.app/blueprint-footer.png", url: "https://hassaanfisky-portfolio.vercel.app",    id: "H0" },
-  { name: "Physical AI & Robotics",image: "https://hassaanfisky-portfolio.vercel.app/h1-thumb.png",         url: "https://hackathon-1-robotics.vercel.app",                            id: "H1" },
-  { name: "Evolution of To-Do",    image: "https://hassaanfisky-portfolio.vercel.app/h2-thumb.png",         url: "https://evolution-of-todo.vercel.app",         id: "H2" },
-  { name: "LearnFlow Engine",      image: "https://hassaanfisky-portfolio.vercel.app/h3-thumb.png",         url: "https://learnflow-platform-h3.vercel.app",                            id: "H3" },
-  { name: "AI Companion FTE",      image: "https://hassaanfisky-portfolio.vercel.app/h4-thumb.png",         url: "https://hassaanfisky-aira-digital-fte.vercel.app", id: "H4" },
+  { name: "Portfolio Hub",         image: "https://panaversity-h0-portfolio.vercel.app/blueprint-footer.png", url: "https://panaversity-h0-portfolio.vercel.app",    id: "H0" },
+  { name: "Physical AI & Robotics",image: "https://panaversity-h0-portfolio.vercel.app/h1-thumb.png",         url: "https://h1-robotics-textbook.vercel.app",                            id: "H1" },
+  { name: "Evolution of To-Do",    image: "https://panaversity-h0-portfolio.vercel.app/h2-thumb.png",         url: "https://hassaanfisky-panaversity-todo-app.vercel.app",         id: "H2" },
+  { name: "LearnFlow Engine",      image: "https://panaversity-h0-portfolio.vercel.app/h3-thumb.png",         url: "https://learnflow-platform-h3.vercel.app",                            id: "H3" },
+  { name: "AI Companion FTE",      image: "https://panaversity-h0-portfolio.vercel.app/h4-thumb.png",         url: "https://hassaanfisky-aira-digital-fte.vercel.app", id: "H4" },
 ];
 
 export function EcosystemNav() {
@@ -29,7 +29,7 @@ export function EcosystemNav() {
   const handleSignIn = () => {
     if (typeof window !== 'undefined') {
        // Single Sign-On Hub (H2 - Evolution of To-Do)
-       const authHub = "https://evolution-of-todo.vercel.app/sign-in";
+       const authHub = "https://hassaanfisky-panaversity-todo-app.vercel.app/sign-in";
        window.location.href = `${authHub}?redirect=${encodeURIComponent(window.location.href)}`;
     }
   };
