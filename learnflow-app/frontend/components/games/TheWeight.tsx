@@ -140,14 +140,33 @@ export default function TheWeight({ onExit }: { onExit: (score: number) => void 
     setTimeLeft(timeCap);
     timerRef.current = setInterval(() => {
       setTimeLeft((t) => {
-        if (t >= timeCap) return t;
-        return t + 1;
+        if (t <= 0) return 0;
+        return t - 1;
       });
     }, 1000);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
   }, [phase, timeCap, world.round]);
+
+  // Time-out: no score for this round; advance or finish.
+  useEffect(() => {
+    if (phase !== "PLAY" || timeLeft > 0) return;
+    if (timerRef.current) clearInterval(timerRef.current);
+    tone(140, 0.35, 0.1, "sawtooth");
+    setShake(true);
+    const t = setTimeout(() => {
+      setShake(false);
+      if (world.round >= TOTAL_ROUNDS) {
+        setPhase("DONE");
+      } else {
+        const nr = makeRound(world.round + 1);
+        dispatch({ type: "NEXT_ROUND", goal: nr.goal, tokens: nr.tokens });
+        setPhase("PLAY");
+      }
+    }, 900);
+    return () => clearTimeout(t);
+  }, [phase, timeLeft, world.round]);
 
   const L = sumSide(world.tokens, "left");
   const R = sumSide(world.tokens, "right");

@@ -81,6 +81,12 @@ function reducer(s: World, a: Action): World {
         round: s.round + 1,
         longest: Math.max(s.longest, len),
         score: Math.max(s.longest, len) * 100 + (s.totalRight * 15),
+        // Clear sequence so the next round regenerates a longer one.
+        sequence: [],
+        playedIdx: 0,
+        userIdx: 0,
+        activePad: null,
+        ghostPad: null,
       };
     }
     default:

@@ -11,3 +11,15 @@ dist/
 .pyc
 __pycache__/
 .venv/
+
+# AI Metadata
+.claire/
+.claude/
+**/.claire/
+**/.claude/
+
+# AI Metadata
+.claire/
+.claude/
+**/.claire/
+**/.claude/
