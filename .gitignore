@@ -17,3 +17,9 @@ __pycache__/
 .claude/
 **/.claire/
 **/.claude/
+
+# AI Metadata
+.claire/
+.claude/
+**/.claire/
+**/.claude/
